@@ -1,0 +1,23 @@
+.alert {
+  padding: 0.85em 1.5em;
+  border-radius: 5px;
+  margin: 0.7em 0;
+  font-weight: 500;
+  box-shadow: 0 1px 6px rgba(11,32,39,0.07);
+  position: relative;
+}
+
+.alert-info    { background: var(--color-secondary); color: var(--color-bg);}
+.alert-success { background: var(--color-accent);   color: var(--color-primary);}
+.alert-error   { background: var(--color-danger);   color: var(--color-bg);}
+
+.alert-close {
+  background: transparent;
+  border: none;
+  position: absolute;
+  right: 1em;
+  top: 0.85em;
+  font-size: 1.2em;
+  color: inherit;
+  cursor: pointer;
+}

@@ -1,0 +1,10 @@
+.home-titulo {
+  text-align: center;
+  margin-bottom: 1.3em;
+  color: var(--color-primary);
+}
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2em;
+}

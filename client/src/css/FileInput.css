@@ -1,0 +1,18 @@
+.file-input {
+  display: block;
+  padding: 0.42em 0.3em;
+  border: 1.5px solid var(--color-secondary);
+  background: var(--color-bg);
+  border-radius: 5px;
+  color: var(--color-primary);
+  font-size: 1em;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.15em;
+}
+
+.file-input:focus {
+  border-color: var(--color-accent);
+  outline: 2px solid var(--color-accent);
+}

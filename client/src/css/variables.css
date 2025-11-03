@@ -1,0 +1,8 @@
+:root {
+  --color-primary: rgb(11, 32, 39);      /* fondo principal / botón primario */
+  --color-secondary: rgb(127, 123, 130); /* botones neutros, bordes, etc */
+  --color-accent: rgb(249, 200, 70);     /* botones destacados, hover, loading */
+  --color-danger: rgb(137, 6, 32);      /* botones de borrar, error, etc */
+  --color-text: rgb(20, 22, 24);         /* texto principal */
+  --color-bg: rgb(245, 247, 249);        /* fondo general muy claro */
+}
