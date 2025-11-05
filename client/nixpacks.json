@@ -1,9 +1,15 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "nixpacksSettings": {
-    "installCommand": "npm install",
-    "buildCommand": "npm run build",
-    "startCommand": "npx serve -s build -l $PORT"
+  "phases": {
+    "install": {
+      "cmds": ["npm install"]
+    },
+    "build": {
+      "cmds": ["npm run build"]
+    },
+    "start": {
+      "cmd": "npx serve -s build -p $PORT"
+    }
   }
 }
