@@ -4,6 +4,7 @@ import Button from '../atoms/Button';
 import Loader from '../atoms/Loader';
 import Alert from '../molecules/Alert';
 import Card from '../molecules/Card';
+import API_URL from '../config';
 
 const FormCorreo = ({ onResultado }) => {
   const [reservas, setReservas] = useState(null);
@@ -23,7 +24,7 @@ const FormCorreo = ({ onResultado }) => {
     formData.append('reservas', reservas);
 
     try {
-      const res = await fetch('/api/correo/generar', {
+      const res = await fetch(`${API_URL}/api/correo/generar`, {
         method: 'POST',
         body: formData,
       });

@@ -7,6 +7,7 @@ import Loader from '../atoms/Loader';
 import Alert from '../molecules/Alert';
 import Card from '../molecules/Card';
 import InstructionsList from '../molecules/InstructionsList';
+import API_URL from '../config';
 
 const instruccionesAptos = [
   'Prepara el archivo XLSX con la información completa de tus apartamentos',
@@ -34,7 +35,7 @@ const ApartamentosPage = () => {
     formData.append('file', file);
 
     try {
-      const res = await fetch('/api/apartamentos/import', {
+      const res = await fetch(`${API_URL}/api/apartamentos/import`, {
         method: 'POST',
         body: formData,
       });

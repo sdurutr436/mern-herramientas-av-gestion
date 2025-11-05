@@ -4,6 +4,7 @@ import Button from '../atoms/Button';
 import Loader from '../atoms/Loader';
 import Alert from '../molecules/Alert';
 import Card from '../molecules/Card';
+import API_URL from '../config';
 
 const FormContactos = () => {
   const [reservas, setReservas] = useState(null);
@@ -23,7 +24,7 @@ const FormContactos = () => {
     formData.append('reservas', reservas);
 
     try {
-      const res = await fetch('/api/contactos/google', {
+      const res = await fetch(`${API_URL}/api/contactos/google`, {
         method: 'POST',
         body: formData,
       });

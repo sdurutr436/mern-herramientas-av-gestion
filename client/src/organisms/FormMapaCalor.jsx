@@ -5,6 +5,7 @@ import Loader from '../atoms/Loader';
 import Alert from '../molecules/Alert';
 import Card from '../molecules/Card';
 import Input from '../atoms/Input';
+import API_URL from '../config';
 
 const FormMapaCalor = ({ onResultado }) => {
   const [reservas, setReservas] = useState(null);
@@ -28,7 +29,7 @@ const FormMapaCalor = ({ onResultado }) => {
     formData.append('fecha', fecha);
 
     try {
-      const res = await fetch('/api/mapa/obtener', {
+      const res = await fetch(`${API_URL}/api/mapa/obtener`, {
         method: 'POST',
         body: formData,
       });
