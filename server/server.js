@@ -10,6 +10,9 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Trust proxy - necesario para Railway/Heroku/etc
+app.set('trust proxy', 1);
+
 // SEGURIDAD - Helmet (protección de headers HTTP)
 app.use(helmet({
     contentSecurityPolicy: {
