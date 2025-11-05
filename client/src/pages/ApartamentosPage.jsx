@@ -6,12 +6,15 @@ import Button from '../atoms/Button';
 import Loader from '../atoms/Loader';
 import Alert from '../molecules/Alert';
 import Card from '../molecules/Card';
+import InstructionsList from '../molecules/InstructionsList';
 
-const instruccionAptos = `
-1. Carga el archivo CSV de apartamentos.
-2. Haz clic en "Importar" para almacenar los datos en la base de datos.
-3. El sistema te indicará la cantidad de apartamentos nuevos.
-`;
+const instruccionesAptos = [
+  'Prepara el archivo XLSX con la información completa de tus apartamentos',
+  'Carga el archivo usando el selector de archivos',
+  'Haz clic en el botón "Importar" para iniciar el proceso de almacenamiento',
+  'El sistema procesará los datos y te mostrará cuántos apartamentos se han importado',
+  'Los apartamentos quedarán almacenados permanentemente en la base de datos MongoDB'
+];
 
 const ApartamentosPage = () => {
   const [file, setFile] = useState(null);
@@ -50,9 +53,10 @@ const ApartamentosPage = () => {
   return (
     <MainLayout>
       <HerramientaTemplate
-        titulo="Importar Apartamentos CSV"
-        descripcion={instruccionAptos}
+        titulo="Importador de Apartamentos a Base de Datos"
+        descripcion="Importa y almacena permanentemente la información de tus apartamentos en MongoDB para uso en otras herramientas."
       >
+        <InstructionsList steps={instruccionesAptos} type="primary" />
         <Card>
           <form onSubmit={handleSubmit}>
             <FileUpload

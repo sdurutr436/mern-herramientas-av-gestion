@@ -1,8 +1,101 @@
 :root {
-  --color-primary: rgb(11, 32, 39);      /* fondo principal / botón primario */
-  --color-secondary: rgb(127, 123, 130); /* botones neutros, bordes, etc */
-  --color-accent: rgb(249, 200, 70);     /* botones destacados, hover, loading */
-  --color-danger: rgb(137, 6, 32);      /* botones de borrar, error, etc */
-  --color-text: rgb(20, 22, 24);         /* texto principal */
-  --color-bg: rgb(245, 247, 249);        /* fondo general muy claro */
+  /* ============================================ */
+  /* MODO CLARO - Paleta Cálida */
+  /* ============================================ */
+  --color-beige-light: #e7d8ab;      /* Beige claro */
+  --color-mustard: #ed9c05;          /* Amarillo mostaza */
+  --color-orange: #ca6703;           /* Naranja */
+  --color-orange-dark: #bb3f03;      /* Naranja oscuro */
+  --color-red: #b02113;              /* Rojo */
+  --color-wine: #9d2227;             /* Rojo vino */
+  
+  /* Colores funcionales MODO CLARO */
+  --color-primary: var(--color-orange);
+  --color-secondary: var(--color-mustard);
+  --color-accent: var(--color-orange-dark);
+  --color-highlight: var(--color-mustard);
+  --color-danger: var(--color-wine);
+  --color-success: var(--color-orange);
+  
+  /* Colores de texto y fondo MODO CLARO */
+  --color-text: #1a1a1a;
+  --color-text-light: #4a4a4a;
+  --color-text-on-dark: #ffffff;
+  --color-bg: #faf8f3;
+  --color-bg-secondary: #ffffff;
+  --color-border: #d4c59a;
+  
+  /* Header y Footer MODO CLARO */
+  --header-bg-start: var(--color-orange-dark);
+  --header-bg-end: var(--color-wine);
+  --header-text: var(--color-beige-light);
+  --header-border: var(--color-mustard);
+  
+  /* Tipografía */
+  --font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Espaciado */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Sombras MODO CLARO */
+  --shadow-sm: 0 1px 3px rgba(187, 63, 3, 0.12);
+  --shadow-md: 0 4px 6px rgba(187, 63, 3, 0.15);
+  --shadow-lg: 0 10px 20px rgba(187, 63, 3, 0.2);
+  
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  
+  /* Transiciones */
+  --transition-theme: all 0.3s ease;
 }
+
+/* ============================================ */
+/* MODO OSCURO - Paleta Fría */
+/* ============================================ */
+[data-theme="dark"] {
+  --color-navy-dark: #01131b;        /* Negro azulado */
+  --color-teal-dark: #015f72;        /* Azul petróleo */
+  --color-turquoise: #0a9295;        /* Turquesa */
+  --color-mint-light: #93cfbb;       /* Verde menta claro */
+  --color-beige-light: #e7d8ab;      /* Beige claro */
+  
+  /* Colores funcionales MODO OSCURO */
+  --color-primary: var(--color-teal-dark);
+  --color-secondary: var(--color-turquoise);
+  --color-accent: var(--color-mint-light);
+  --color-highlight: var(--color-beige-light);
+  --color-danger: #e74c3c;
+  --color-success: var(--color-turquoise);
+  
+  /* Colores de texto y fondo MODO OSCURO */
+  --color-text: #e7d8ab;
+  --color-text-light: #93cfbb;
+  --color-text-on-dark: #ffffff;
+  --color-bg: #01131b;
+  --color-bg-secondary: #022a38;
+  --color-border: #015f72;
+  
+  /* Header y Footer MODO OSCURO */
+  --header-bg-start: var(--color-navy-dark);
+  --header-bg-end: var(--color-teal-dark);
+  --header-text: var(--color-beige-light);
+  --header-border: var(--color-turquoise);
+  
+  /* Sombras MODO OSCURO */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+

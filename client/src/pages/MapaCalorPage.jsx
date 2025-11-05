@@ -3,13 +3,15 @@ import MainLayout from '../templates/MainLayout';
 import HerramientaTemplate from '../templates/HerramientaTemplate';
 import FormMapaCalor from '../organisms/FormMapaCalor';
 import Resultados from '../organisms/Resultados';
+import InstructionsList from '../molecules/InstructionsList';
 
-const instruccionMapa = `
-1. Carga los archivos XLSX de reservas y de apartamentos.
-2. Selecciona una fecha de consulta.
-3. Haz clic en "Ver datos para mapa".
-4. Se mostrará la ocupación y detalle para cada apartamento (puede usarse para pintar un mapa de calor en el frontend).
-`;
+const instruccionesMapa = [
+  'Carga el archivo XLSX de reservas de tu sistema de gestión',
+  'Carga el archivo XLSX de apartamentos con la información de tus propiedades',
+  'Selecciona una fecha específica para consultar la ocupación',
+  'Haz clic en "Ver datos para mapa" para generar el análisis',
+  'Se mostrará un JSON con la ocupación y detalles de cada apartamento para visualización'
+];
 
 const MapaCalorPage = () => {
   const [datosMapa, setDatosMapa] = useState(null);
@@ -17,9 +19,10 @@ const MapaCalorPage = () => {
   return (
     <MainLayout>
       <HerramientaTemplate
-        titulo="Generar datos mapa de calor desde reservas y apartamentos"
-        descripcion={instruccionMapa}
+        titulo="Generador de Datos de Mapa de Calor"
+        descripcion="Visualiza la ocupación de apartamentos por fecha con datos estructurados para crear mapas de calor interactivos."
       >
+        <InstructionsList steps={instruccionesMapa} type="info" />
         <FormMapaCalor onResultado={setDatosMapa} />
         {datosMapa && (
           <Resultados texto={JSON.stringify(datosMapa, null, 2)} />

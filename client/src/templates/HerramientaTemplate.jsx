@@ -1,12 +1,13 @@
 import React from 'react';
-import Card from '../molecules/Card';
+import '../css/HerramientasTemplate.css';
 
 const HerramientaTemplate = ({ titulo, descripcion, children }) => (
-  <div>
-    <Card title={titulo}>
-      <div className="herramienta-descripcion">{descripcion}</div>
-    </Card>
-    {children}
+  <div className="herramienta-page">
+    <h1 className="herramienta-titulo">{titulo}</h1>
+    <p className="herramienta-descripcion">{descripcion}</p>
+    <div className="herramienta-contenido">
+      {children}
+    </div>
   </div>
 );
 

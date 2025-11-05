@@ -10,6 +10,7 @@ Sistema de gestión integral para apartamentos turísticos desarrollado con el s
 - [Instalación](#-instalación)
 - [Configuración](#-configuración)
 - [Uso](#-uso)
+- [Despliegue con Docker](#-despliegue-con-docker)
 - [Estructura del Proyecto](#-estructura-del-proyecto)
 - [API Endpoints](#-api-endpoints)
 - [Tecnologías](#-tecnologías)
@@ -176,7 +177,224 @@ La aplicación estará disponible en `http://localhost:3000`
 - Selecciona fecha de consulta
 - Obtén datos JSON con ocupación por apartamento
 
-## 📂 Estructura del Proyecto
+## � Despliegue con Docker
+
+La aplicación está completamente dockerizada y lista para desplegar en cualquier entorno.
+
+### Requisitos
+
+- **Docker** >= 20.x
+- **Docker Compose** >= 2.x
+
+### Configuración Rápida
+
+1. **Crea un archivo `.env`** en la raíz del proyecto:
+
+```bash
+cp .env.example .env
+```
+
+Edita `.env` con tus credenciales:
+
+```env
+MONGO_USERNAME=admin
+MONGO_PASSWORD=tu_password_seguro
+MONGO_DB=herramientas
+PORT=5000
+NODE_ENV=production
+```
+
+2. **Construye y levanta los contenedores:**
+
+```bash
+docker-compose up -d --build
+```
+
+Esto creará y arrancará 3 servicios:
+- **MongoDB** (puerto 27017)
+- **Backend** (puerto 5000)
+- **Frontend** (puerto 80)
+
+3. **Accede a la aplicación:**
+
+Abre tu navegador en `http://localhost`
+
+### Comandos Docker Útiles
+
+**Ver logs en tiempo real:**
+```bash
+docker-compose logs -f
+```
+
+**Ver logs de un servicio específico:**
+```bash
+docker-compose logs -f backend
+docker-compose logs -f frontend
+docker-compose logs -f mongodb
+```
+
+**Detener los contenedores:**
+```bash
+docker-compose down
+```
+
+**Detener y eliminar volúmenes (⚠️ elimina la base de datos):**
+```bash
+docker-compose down -v
+```
+
+**Reconstruir solo un servicio:**
+```bash
+docker-compose up -d --build backend
+```
+
+**Acceder a la shell de un contenedor:**
+```bash
+docker exec -it mern-herramientas-backend sh
+docker exec -it mern-herramientas-frontend sh
+docker exec -it mern-herramientas-mongodb mongosh
+```
+
+### Arquitectura Docker
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                   Docker Network                         │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
+│  │   Frontend   │  │   Backend    │  │   MongoDB    │  │
+│  │  (Nginx)     │──│  (Node.js)   │──│  (Database)  │  │
+│  │  Port: 80    │  │  Port: 5000  │  │  Port: 27017 │  │
+│  └──────────────┘  └──────────────┘  └──────────────┘  │
+│         │                  │                  │          │
+│         └──────────────────┴──────────────────┘          │
+│                    mern-network                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Características del Docker Setup
+
+#### Frontend (React + Nginx)
+- **Build multi-etapa** para optimizar tamaño de imagen
+- **Nginx** como servidor web de producción
+- **Gzip compression** habilitada
+- **Cache** de assets estáticos (1 año)
+- **Proxy reverso** a backend para `/api/*`
+- **React Router** configurado (todas las rutas → `index.html`)
+
+#### Backend (Node.js + Express)
+- **Imagen Alpine** para menor tamaño
+- **Health check** endpoint en `/api/health`
+- **Variables de entorno** para configuración
+- **Volumen persistente** para `/uploads`
+- **Reinicio automático** con `restart: unless-stopped`
+
+#### MongoDB
+- **Imagen oficial** MongoDB 7.0
+- **Autenticación** configurada vía variables de entorno
+- **Volúmenes persistentes** para datos y configuración
+- **Health check** con mongosh ping
+- **Inicialización automática** de base de datos
+
+### Volúmenes Persistentes
+
+Los datos se almacenan en volúmenes Docker:
+
+```yaml
+volumes:
+  mongodb_data:        # Datos de MongoDB
+  mongodb_config:      # Configuración de MongoDB
+  ./server/uploads:    # Archivos subidos (bind mount)
+```
+
+### Health Checks
+
+Todos los servicios tienen health checks configurados:
+
+- **MongoDB**: `mongosh ping` cada 30s
+- **Backend**: `wget /api/health` cada 30s
+- **Frontend**: `wget localhost:80` cada 30s
+
+### Variables de Entorno
+
+| Variable | Descripción | Por Defecto |
+|----------|-------------|-------------|
+| `MONGO_USERNAME` | Usuario de MongoDB | `admin` |
+| `MONGO_PASSWORD` | Contraseña de MongoDB | `password123` |
+| `MONGO_DB` | Nombre de la base de datos | `herramientas` |
+| `PORT` | Puerto del backend | `5000` |
+| `NODE_ENV` | Entorno Node.js | `production` |
+
+### Despliegue en Producción
+
+Para desplegar en un servidor:
+
+1. **Copia el proyecto al servidor:**
+```bash
+scp -r . usuario@servidor:/ruta/destino
+```
+
+2. **Conecta al servidor:**
+```bash
+ssh usuario@servidor
+```
+
+3. **Configura las variables de entorno:**
+```bash
+cd /ruta/destino
+nano .env
+```
+
+4. **Levanta los contenedores:**
+```bash
+docker-compose up -d --build
+```
+
+5. **Configura un dominio (opcional):**
+   - Actualiza el proxy de nginx para tu dominio
+   - Añade certificados SSL con Let's Encrypt
+
+### Monitorización
+
+**Ver estado de contenedores:**
+```bash
+docker-compose ps
+```
+
+**Ver uso de recursos:**
+```bash
+docker stats
+```
+
+**Verificar health de los servicios:**
+```bash
+docker inspect mern-herramientas-backend | grep -A 10 Health
+```
+
+### Troubleshooting
+
+**El backend no se conecta a MongoDB:**
+- Verifica que MongoDB esté healthy: `docker-compose ps`
+- Revisa logs: `docker-compose logs mongodb`
+- Verifica variables de entorno en `.env`
+
+**El frontend no se conecta al backend:**
+- Verifica que el backend esté corriendo: `docker-compose ps`
+- Revisa configuración de nginx en `client/nginx.conf`
+- Verifica que el proxy apunte a `backend:5000`
+
+**Problemas de permisos en uploads:**
+```bash
+docker exec -it mern-herramientas-backend sh
+mkdir -p /app/uploads
+chmod 755 /app/uploads
+```
+
+**Reiniciar todos los servicios:**
+```bash
+docker-compose restart
+```
+
+## �📂 Estructura del Proyecto
 
 ### Cliente (React)
 

@@ -3,14 +3,15 @@ import MainLayout from '../templates/MainLayout';
 import HerramientaTemplate from '../templates/HerramientaTemplate';
 import FormCorreo from '../organisms/FormCorreo';
 import Resultados from '../organisms/Resultados';
+import InstructionsList from '../molecules/InstructionsList';
 
-const instruccionCorreo = `
-1. Carga los archivos XLSX de reservas y de apartamentos.
-2. El sistema filtrará los huéspedes con llegada a partir de las 20:00.
-3. Se generará un texto personalizado para enviar por correo.
-4. Copia el texto generado para pegarlo en tu correo.
-5. Usa el botón "Borrar todo" para limpiar y cargar nuevos archivos.
-`;
+const instruccionesCorreo = [
+  'Carga el archivo XLSX de reservas descargado de tu sistema de gestión',
+  'El sistema filtrará automáticamente los huéspedes con llegada a partir de las 20:00h',
+  'Se generará un texto personalizado con la información de cada huésped y apartamento',
+  'Copia el texto generado y pégalo directamente en tu correo electrónico',
+  'Usa el botón "Borrar todo" si necesitas limpiar y procesar un nuevo archivo'
+];
 
 const CorreoPage = () => {
   const [textoCorreo, setTextoCorreo] = useState('');
@@ -29,9 +30,10 @@ const CorreoPage = () => {
   return (
     <MainLayout>
       <HerramientaTemplate
-        titulo="Generador de texto para correo - CSV a Texto"
-        descripcion={instruccionCorreo}
+        titulo="Generador de Texto para Correos de Llegadas Tardías"
+        descripcion="Genera automáticamente textos personalizados para notificar a huéspedes con llegadas a partir de las 20:00h."
       >
+        <InstructionsList steps={instruccionesCorreo} type="primary" />
         <FormCorreo onResultado={handleResultado} />
         {showResults && <Resultados output={textoCorreo} total={total} />}
       </HerramientaTemplate>

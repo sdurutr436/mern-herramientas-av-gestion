@@ -22,6 +22,10 @@ server/coverage
 *.local
 *.log
 
+# Uploads - archivos sensibles de usuarios
+server/uploads/
+uploads/
+
 # VSCode settings
 .vscode/
 
