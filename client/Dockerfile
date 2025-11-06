@@ -12,6 +12,10 @@ RUN npm install
 # Copiar código fuente
 COPY . .
 
+# Declarar ARG para recibir la variable durante el build
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
 # Build de la aplicación React
 RUN npm run build
 
