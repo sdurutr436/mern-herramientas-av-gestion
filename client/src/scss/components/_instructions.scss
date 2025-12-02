@@ -1,0 +1,77 @@
+// ============================================
+// COMPONENTE - INSTRUCTIONS LIST NEOBRUTALISTA
+// ============================================
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.instructions-container {
+  background: var(--color-bg-secondary);
+  border: $neo-border-width solid var(--color-text);
+  padding: $spacing-lg;
+  box-shadow: var(--shadow-md);
+}
+
+.instructions-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-md;
+  padding-bottom: $spacing-sm;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.instructions-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: var(--color-primary);
+}
+
+.instructions-title {
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  color: var(--color-text);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.instructions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.instruction-item {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  background: var(--color-secondary);
+  color: var(--color-text);
+  border: 2px solid var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-text {
+  color: var(--color-text-light);
+  font-size: $font-size-sm;
+  line-height: 1.5;
+}

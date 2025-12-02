@@ -1,0 +1,300 @@
+// ============================================
+// PAGES - MAPA DE CALOR
+// ============================================
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// ============================================
+// LEYENDA
+// ============================================
+
+.heatmap-legend {
+  display: flex;
+  gap: $spacing-xl;
+  flex-wrap: wrap;
+  margin-bottom: $spacing-xl;
+  padding: $spacing-lg;
+  background: var(--color-surface);
+  border-radius: $radius-lg;
+  box-shadow: var(--shadow-sm);
+}
+
+.heatmap-legend-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.heatmap-legend-title {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: var(--color-text-light);
+}
+
+.heatmap-legend-scale {
+  display: flex;
+  gap: 4px;
+}
+
+.heatmap-legend-item {
+  width: 24px;
+  height: 24px;
+  border-radius: $radius-sm;
+  border: 1px solid var(--color-border);
+  cursor: help;
+  
+  // Gradientes check-in (verde)
+  &[data-checkin-level="1"] { background: var(--heat-green-1); }
+  &[data-checkin-level="2"] { background: var(--heat-green-2); }
+  &[data-checkin-level="3"] { background: var(--heat-green-3); }
+  &[data-checkin-level="4"] { background: var(--heat-green-4); }
+  &[data-checkin-level="5"] { background: var(--heat-green-5); }
+  &[data-checkin-level="6"] { background: var(--heat-green-6); }
+  &[data-checkin-level="7"] { background: var(--heat-green-7); }
+  &[data-checkin-level="8"] { background: var(--heat-green-max); }
+  
+  // Gradientes check-out (rojo)
+  &[data-checkout-level="1"] { background: var(--heat-red-1); }
+  &[data-checkout-level="2"] { background: var(--heat-red-2); }
+  &[data-checkout-level="3"] { background: var(--heat-red-3); }
+  &[data-checkout-level="4"] { background: var(--heat-red-4); }
+  &[data-checkout-level="5"] { background: var(--heat-red-5); }
+  &[data-checkout-level="6"] { background: var(--heat-red-6); }
+  &[data-checkout-level="7"] { background: var(--heat-red-7); }
+  &[data-checkout-level="8"] { background: var(--heat-red-max); }
+}
+
+// ============================================
+// CALENDARIO
+// ============================================
+
+.heatmap-calendar {
+  background: var(--color-surface);
+  border-radius: $radius-lg;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.heatmap-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.heatmap-day-name {
+  padding: $spacing-sm;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-xs;
+  text-align: center;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  
+  &--weekend {
+    color: var(--color-primary);
+  }
+}
+
+.heatmap-body {
+  background: var(--color-surface);
+}
+
+.heatmap-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid var(--color-border);
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+// ============================================
+// CELDA DEL DÍA
+// ============================================
+
+.heatmap-cell {
+  min-height: 80px;
+  position: relative;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  transition: $transition-fast;
+  
+  &:last-child {
+    border-right: none;
+  }
+  
+  &:hover:not(.heatmap-cell--empty) {
+    transform: scale(1.02);
+    z-index: 10;
+    box-shadow: var(--shadow-lg);
+  }
+  
+  &--empty {
+    background: var(--color-bg);
+    opacity: 0.4;
+  }
+  
+  &--weekend {
+    background: rgba(202, 103, 3, 0.02);
+  }
+  
+  @include respond-to('tablet') {
+    min-height: 60px;
+  }
+}
+
+.heatmap-cell-date {
+  padding: $spacing-xs;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: var(--color-text);
+  text-align: left;
+  flex-shrink: 0;
+}
+
+.heatmap-cell-bars {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+// ============================================
+// ENTRADAS (VERDE) Y SALIDAS (ROJO)
+// ============================================
+
+.heatmap-checkin,
+.heatmap-checkout {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: var(--color-text);
+  transition: background 0.2s ease;
+  
+  span {
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: $radius-sm;
+    font-size: $font-size-xs;
+  }
+}
+
+.heatmap-checkout {
+  border-top: 1px dashed var(--color-border);
+}
+
+// Gradientes de verde para check-in
+.heatmap-checkin {
+  &[data-count="0"] { background: transparent; }
+  &[data-count="1"] { background: var(--heat-green-1); }
+  &[data-count="2"] { background: var(--heat-green-2); }
+  &[data-count="3"] { background: var(--heat-green-3); }
+  &[data-count="4"] { background: var(--heat-green-4); }
+  &[data-count="5"] { background: var(--heat-green-5); span { background: rgba(0,0,0,0.2); color: white; } }
+  &[data-count="6"] { background: var(--heat-green-6); span { background: rgba(0,0,0,0.2); color: white; } }
+  &[data-count="7"] { background: var(--heat-green-7); span { background: rgba(0,0,0,0.2); color: white; } }
+  &[data-count="8"] { background: var(--heat-green-max); span { background: rgba(0,0,0,0.2); color: white; } }
+}
+
+// Gradientes de rojo para check-out
+.heatmap-checkout {
+  &[data-count="0"] { background: transparent; }
+  &[data-count="1"] { background: var(--heat-red-1); }
+  &[data-count="2"] { background: var(--heat-red-2); }
+  &[data-count="3"] { background: var(--heat-red-3); }
+  &[data-count="4"] { background: var(--heat-red-4); }
+  &[data-count="5"] { background: var(--heat-red-5); span { background: rgba(0,0,0,0.2); color: white; } }
+  &[data-count="6"] { background: var(--heat-red-6); span { background: rgba(0,0,0,0.2); color: white; } }
+  &[data-count="7"] { background: var(--heat-red-7); span { background: rgba(0,0,0,0.2); color: white; } }
+  &[data-count="8"] { background: var(--heat-red-max); span { background: rgba(0,0,0,0.2); color: white; } }
+}
+
+// ============================================
+// ESTADÍSTICAS
+// ============================================
+
+.heatmap-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: $spacing-md;
+  margin-top: $spacing-xl;
+}
+
+.heatmap-stat {
+  background: var(--color-surface);
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.heatmap-stat-value {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: var(--color-primary);
+}
+
+.heatmap-stat-label {
+  font-size: $font-size-sm;
+  color: var(--color-text-secondary);
+  margin-top: $spacing-xs;
+}
+
+// ============================================
+// TOOLTIP
+// ============================================
+
+.heatmap-tooltip {
+  position: absolute;
+  background: var(--color-text);
+  color: var(--color-bg);
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-md;
+  font-size: $font-size-xs;
+  white-space: nowrap;
+  z-index: 100;
+  box-shadow: var(--shadow-lg);
+  pointer-events: none;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--color-text);
+  }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+
+@include respond-to('mobile') {
+  .heatmap-legend {
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+  
+  .heatmap-cell {
+    min-height: 50px;
+  }
+  
+  .heatmap-cell-date {
+    font-size: $font-size-2xs;
+  }
+  
+  .heatmap-checkin span,
+  .heatmap-checkout span {
+    font-size: $font-size-2xs;
+    padding: 1px 3px;
+  }
+}

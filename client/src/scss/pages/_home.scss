@@ -1,0 +1,43 @@
+// ============================================
+// PAGES - HOME PAGE NEOBRUTALISTA
+// ============================================
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.home-page {
+  max-width: 100%;
+}
+
+.home-titulo {
+  text-align: center;
+  margin-bottom: $spacing-xl;
+  color: var(--color-text);
+  font-size: 2rem;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  
+  @include respond-to('tablet') {
+    font-size: 1.5rem;
+  }
+}
+
+.home-subtitulo {
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: 1rem;
+  margin-bottom: $spacing-2xl;
+  font-weight: $font-weight-regular;
+}
+
+// Grid 2x2 para las cards
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-lg;
+  
+  @include respond-to('tablet') {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,139 @@
+// ============================================
+// COMPONENTE - FILE UPLOAD
+// ============================================
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.file-upload {
+  width: 100%;
+}
+
+.file-upload-label {
+  display: block;
+  font-weight: $font-weight-medium;
+  color: var(--color-text);
+  margin-bottom: $spacing-sm;
+  font-size: $font-size-sm;
+}
+
+.file-upload-dropzone {
+  border: 2px dashed var(--color-border);
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  text-align: center;
+  cursor: pointer;
+  transition: $transition-fast;
+  background: var(--color-surface);
+  
+  &:hover {
+    border-color: var(--color-primary);
+    background: rgba(202, 103, 3, 0.02);
+  }
+  
+  &.dragging {
+    border-color: var(--color-primary);
+    background: rgba(202, 103, 3, 0.05);
+    border-style: solid;
+  }
+  
+  &.has-file {
+    border-color: var(--color-success);
+    background: rgba(46, 125, 50, 0.02);
+  }
+}
+
+.file-upload-icon {
+  font-size: 2.5rem;
+  margin-bottom: $spacing-sm;
+  opacity: 0.5;
+  
+  .has-file & {
+    opacity: 1;
+  }
+}
+
+.file-upload-text {
+  color: var(--color-text-secondary);
+  font-size: $font-size-sm;
+  margin-bottom: $spacing-xs;
+  
+  strong {
+    color: var(--color-primary);
+  }
+}
+
+.file-upload-hint {
+  color: var(--color-text-light);
+  font-size: $font-size-xs;
+}
+
+.file-upload-input {
+  display: none;
+}
+
+// Archivo seleccionado
+.file-upload-selected {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: var(--color-bg);
+  border-radius: $radius-md;
+  margin-top: $spacing-sm;
+}
+
+.file-upload-filename {
+  flex: 1;
+  font-size: $font-size-sm;
+  color: var(--color-text);
+  font-weight: $font-weight-medium;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-upload-size {
+  font-size: $font-size-xs;
+  color: var(--color-text-secondary);
+}
+
+.file-upload-remove {
+  background: none;
+  border: none;
+  color: var(--color-danger);
+  cursor: pointer;
+  padding: $spacing-xs;
+  border-radius: $radius-sm;
+  transition: $transition-fast;
+  
+  &:hover {
+    background: rgba(157, 34, 39, 0.1);
+  }
+}
+
+// Variante compacta
+.file-upload-compact {
+  .file-upload-dropzone {
+    padding: $spacing-md;
+  }
+  
+  .file-upload-icon {
+    font-size: 1.5rem;
+    margin-bottom: $spacing-xs;
+  }
+}
+
+// Error state
+.file-upload-error {
+  .file-upload-dropzone {
+    border-color: var(--color-danger);
+    background: rgba(157, 34, 39, 0.02);
+  }
+}
+
+.file-upload-error-text {
+  color: var(--color-danger);
+  font-size: $font-size-xs;
+  margin-top: $spacing-xs;
+}

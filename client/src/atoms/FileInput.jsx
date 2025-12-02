@@ -1,5 +1,4 @@
 import React from 'react';
-import '../css/FileInput.css';
 
 const FileInput = ({ label, onChange, accept, multiple = false, ...rest }) => (
   <div className="input-group">

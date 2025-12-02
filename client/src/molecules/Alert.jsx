@@ -1,5 +1,4 @@
 import React from 'react';
-import '../css/Alert.css';
 
 const Alert = ({ message, type = 'info', onClose }) => (
   <div className={`alert alert-${type}`}>

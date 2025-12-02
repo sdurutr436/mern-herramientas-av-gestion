@@ -1,0 +1,98 @@
+// ============================================
+// COMPONENTE - BUTTON NEOBRUTALISTA
+// ============================================
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.btn {
+  padding: 0.75em 1.5em;
+  border: $neo-border-width solid var(--color-text);
+  border-radius: 0;
+  font-family: $font-family;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: var(--shadow-md);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  
+  @include neo-hover;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+// === VARIANTES ===
+.btn-primary {
+  background: var(--color-secondary);
+  color: var(--color-text);
+  
+  &:hover,
+  &:focus {
+    background: var(--color-highlight);
+  }
+}
+
+.btn-secondary {
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  
+  &:hover,
+  &:focus {
+    background: var(--color-highlight);
+  }
+}
+
+.btn-danger {
+  background: var(--color-danger);
+  color: var(--color-text-on-dark);
+  
+  &:hover,
+  &:focus {
+    background: var(--color-red);
+  }
+}
+
+// Botones de navegación (header)
+.btn-nav {
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 0.5em 1em;
+  font-size: $font-size-xs;
+  
+  &:hover,
+  &:focus {
+    background: var(--color-secondary);
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-primary);
+  box-shadow: none;
+  border: $neo-border-width dashed var(--color-border);
+  
+  &:hover {
+    background: var(--color-bg-alt);
+    border-style: solid;
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+// === GRUPO DE BOTONES ===
+.btn-group {
+  display: flex;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+  margin-top: $spacing-md;
+}

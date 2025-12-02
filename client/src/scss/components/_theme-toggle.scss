@@ -1,0 +1,54 @@
+// ============================================
+// COMPONENTE - THEME TOGGLE NEOBRUTALISTA
+// ============================================
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// Mismo estilo que .btn-nav para consistencia
+.theme-toggle {
+  background: var(--color-bg);
+  border: $neo-border-width solid var(--color-text);
+  padding: 0.5em 0.75em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  box-shadow: var(--shadow-md);
+  transition: $transition-fast;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+  
+  @include neo-hover;
+  
+  &:hover {
+    background: var(--color-secondary);
+  }
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+.theme-icon {
+  width: 16px;
+  height: 16px;
+  color: currentColor;
+  transition: transform 0.2s ease;
+  
+  .theme-toggle:hover & {
+    transform: rotate(15deg);
+  }
+}
+
+.sun-icon {
+  // Estilo específico sol
+}
+
+.moon-icon {
+  // Estilo específico luna
+}

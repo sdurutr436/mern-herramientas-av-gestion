@@ -1,0 +1,27 @@
+// ============================================
+// MAIN SCSS - Herramientas AV Gestión
+// ============================================
+
+// === BASE ===
+@use 'variables';
+@use 'mixins';
+@use 'global';
+
+// === COMPONENTES ===
+@use 'components/button';
+@use 'components/card';
+@use 'components/input';
+@use 'components/alert';
+@use 'components/loader';
+@use 'components/theme-toggle';
+@use 'components/instructions';
+@use 'components/file-upload';
+@use 'components/toast';
+
+// === LAYOUT ===
+@use 'layout/main-layout';
+@use 'layout/herramienta';
+
+// === PÁGINAS ===
+@use 'pages/home';
+@use 'pages/heatmap';

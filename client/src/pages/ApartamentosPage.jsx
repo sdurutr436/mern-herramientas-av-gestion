@@ -51,28 +51,40 @@ const ApartamentosPage = () => {
     setLoading(false);
   };
 
+  const sidebarContent = (
+    <>
+      <InstructionsList steps={instruccionesAptos} type="primary" />
+      <Card>
+        <form onSubmit={handleSubmit}>
+          <FileUpload
+            label="Apartamentos (.xlsx)"
+            accept=".xlsx"
+            onFileChange={e => setFile(e.target.files[0])}
+            file={file}
+            onRemove={() => setFile(null)}
+          />
+          {alerta && <Alert message={alerta.message} type={alerta.type} onClose={() => setAlerta(null)}/>}
+          <Button variant="primary" type="submit" disabled={loading}>
+            {loading ? <Loader size={18}/> : 'Importar'}
+          </Button>
+        </form>
+      </Card>
+    </>
+  );
+
   return (
     <MainLayout>
       <HerramientaTemplate
         titulo="Importador de Apartamentos a Base de Datos"
         descripcion="Importa y almacena permanentemente la información de tus apartamentos en MongoDB para uso en otras herramientas."
+        sidebar={sidebarContent}
       >
-        <InstructionsList steps={instruccionesAptos} type="primary" />
-        <Card>
-          <form onSubmit={handleSubmit}>
-            <FileUpload
-              label="Apartamentos (.xlsx)"
-              accept=".xlsx"
-              onFileChange={e => setFile(e.target.files[0])}
-              file={file}
-              onRemove={() => setFile(null)}
-            />
-            {alerta && <Alert message={alerta.message} type={alerta.type} onClose={() => setAlerta(null)}/>}
-            <Button variant="primary" type="submit" disabled={loading}>
-              {loading ? <Loader size={18}/> : 'Importar'}
-            </Button>
-          </form>
-        </Card>
+        <div className="herramienta__placeholder">
+          <svg className="herramienta__placeholder-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z" fill="currentColor"/>
+          </svg>
+          <p>Los apartamentos importados se almacenarán en la base de datos para usar en otras herramientas.</p>
+        </div>
       </HerramientaTemplate>
     </MainLayout>
   );

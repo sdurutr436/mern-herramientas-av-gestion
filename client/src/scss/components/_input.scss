@@ -1,0 +1,82 @@
+// ============================================
+// COMPONENTE - INPUT NEOBRUTALISTA
+// ============================================
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.input-group {
+  margin-bottom: $spacing-lg;
+}
+
+.input-label {
+  display: block;
+  font-weight: $font-weight-bold;
+  color: var(--color-text);
+  margin-bottom: $spacing-sm;
+  font-size: $font-size-sm;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.input,
+.file-input {
+  width: 100%;
+  padding: $spacing-md;
+  border: $neo-border-width solid var(--color-text);
+  font-family: $font-family;
+  font-size: $font-size-base;
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+  box-shadow: 3px 3px 0 var(--color-text);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  
+  &:focus {
+    outline: none;
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--color-text);
+    border-color: var(--color-primary);
+  }
+  
+  &::placeholder {
+    color: var(--color-text-light);
+    opacity: 0.7;
+  }
+}
+
+// === SELECT ===
+select.input {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%231a1a1a' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $spacing-md center;
+  padding-right: $spacing-2xl;
+}
+
+// === TEXTAREA ===
+textarea.input {
+  min-height: 120px;
+  resize: vertical;
+}
+
+// === FILE INPUT ===
+.file-input {
+  cursor: pointer;
+  
+  &::file-selector-button {
+    padding: $spacing-sm $spacing-md;
+    margin-right: $spacing-md;
+    border: 2px solid var(--color-text);
+    background: var(--color-secondary);
+    color: var(--color-text);
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    
+    &:hover {
+      background: var(--color-highlight);
+    }
+  }
+}

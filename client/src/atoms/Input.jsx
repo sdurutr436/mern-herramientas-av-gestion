@@ -1,5 +1,4 @@
 import React from 'react';
-import '../css/Input.css';
 
 const Input = ({ label, value, onChange, type = 'text', placeholder, ...rest }) => (
   <div className="input-group">

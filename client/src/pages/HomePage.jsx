@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import MainLayout from '../templates/MainLayout';
 import Card from '../molecules/Card';
 import Button from '../atoms/Button';
-import '../css/HomePage.css';
 
 const herramientas = [
   { 
@@ -41,7 +40,7 @@ const HomePage = () => {
         <div className="home-grid">
           {herramientas.map(h => (
             <Card key={h.path} title={h.label}>
-              <p>{h.descripcion}</p>
+              <p className="card-description">{h.descripcion}</p>
               <Button variant="primary" onClick={() => navigate(h.path)}>
                 Acceder →
               </Button>

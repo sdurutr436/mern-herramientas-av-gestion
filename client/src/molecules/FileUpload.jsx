@@ -1,7 +1,6 @@
 import React from 'react';
 import FileInput from '../atoms/FileInput';
 import Button from '../atoms/Button';
-import '../css/FileUpload.css';
 
 const FileUpload = ({
   label,

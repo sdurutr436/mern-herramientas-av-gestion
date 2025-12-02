@@ -1,4 +1,11 @@
-/* Reset básico y estilos globales */
+// ============================================
+// GLOBAL - Estilos base
+// ============================================
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// === RESET ===
 * {
   margin: 0;
   padding: 0;
@@ -13,8 +20,8 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font-family);
-  font-weight: var(--font-weight-regular);
+  font-family: $font-family;
+  font-weight: $font-weight-regular;
   color: var(--color-text);
   background-color: var(--color-bg);
   line-height: 1.6;
@@ -26,55 +33,42 @@ body {
   min-height: 100vh;
 }
 
-/* Tipografía */
+// === TIPOGRAFÍA ===
 h1, h2, h3, h4, h5, h6 {
-  font-weight: var(--font-weight-bold);
+  font-weight: $font-weight-bold;
   line-height: 1.2;
   color: var(--color-text);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: $spacing-md;
   transition: var(--transition-theme);
 }
 
-h1 {
-  font-size: 2.5rem;
-  font-weight: var(--font-weight-bold);
-}
-
-h2 {
-  font-size: 2rem;
-  font-weight: var(--font-weight-semibold);
-}
-
-h3 {
-  font-size: 1.5rem;
-}
-
-h4 {
-  font-size: 1.25rem;
-}
+h1 { font-size: $font-size-4xl; }
+h2 { font-size: $font-size-3xl; }
+h3 { font-size: $font-size-2xl; }
+h4 { font-size: $font-size-xl; }
 
 p {
-  margin-bottom: var(--spacing-md);
+  margin-bottom: $spacing-md;
   color: var(--color-text-light);
   transition: var(--transition-theme);
 }
 
-/* Enlaces */
+// === ENLACES ===
 a {
   color: var(--color-secondary);
   text-decoration: none;
   transition: color 0.2s ease;
+  
+  &:hover {
+    color: var(--color-accent);
+  }
 }
 
-a:hover {
-  color: var(--color-accent);
-}
-
-/* Código */
+// === CÓDIGO ===
 code {
   font-family: 'Courier New', monospace;
   padding: 0.2em 0.4em;
-  border-radius: var(--radius-sm);
+  border-radius: $radius-sm;
   font-size: 0.9em;
   transition: var(--transition-theme);
 }
@@ -87,7 +81,7 @@ code {
   background-color: rgba(10, 146, 149, 0.1);
 }
 
-/* Scrollbar personalizada */
+// === SCROLLBAR ===
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -99,21 +93,15 @@ code {
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-border);
-  border-radius: 5px;
+  border-radius: $radius-md;
+  
+  &:hover {
+    background: var(--color-primary);
+  }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
-}
-
-/* Selección de texto */
+// === SELECCIÓN ===
 ::selection {
-  background-color: var(--color-accent);
-  color: var(--color-text-on-dark);
+  background: var(--color-secondary);
+  color: var(--color-text);
 }
-
-::-moz-selection {
-  background-color: var(--color-accent);
-  color: var(--color-text-on-dark);
-}
-

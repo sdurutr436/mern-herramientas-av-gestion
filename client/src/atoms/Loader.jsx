@@ -1,5 +1,4 @@
 import React from 'react';
-import '../css/Loader.css';
 
 const Loader = ({ size = 24 }) => (
   <div

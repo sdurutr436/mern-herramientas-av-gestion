@@ -1,5 +1,4 @@
 import React from 'react';
-import '../css/Button.css';
 
 const Button = ({ children, onClick, type = 'button', variant = 'primary', disabled }) => (
   <button

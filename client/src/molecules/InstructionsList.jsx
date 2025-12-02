@@ -1,5 +1,4 @@
 import React from 'react';
-import '../css/InstructionsList.css';
 
 const InstructionsList = ({ steps, type = 'primary' }) => {
   return (

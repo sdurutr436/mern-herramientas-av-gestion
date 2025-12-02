@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fondo con forma de casa/edificio estilizado -->
+  <rect x="64" y="128" width="384" height="320" fill="#e7d8ab" stroke="#1a1a1a" stroke-width="16"/>
+  
+  <!-- Techo angular neobrutal -->
+  <polygon points="32,128 256,32 480,128" fill="#ca6703" stroke="#1a1a1a" stroke-width="16"/>
+  
+  <!-- Ventanas grid (representando apartamentos) -->
+  <!-- Fila 1 -->
+  <rect x="96" y="176" width="72" height="56" fill="#015f72" stroke="#1a1a1a" stroke-width="8"/>
+  <rect x="184" y="176" width="72" height="56" fill="#0a9295" stroke="#1a1a1a" stroke-width="8"/>
+  <rect x="272" y="176" width="72" height="56" fill="#93cfbb" stroke="#1a1a1a" stroke-width="8"/>
+  <rect x="360" y="176" width="72" height="56" fill="#ed9c05" stroke="#1a1a1a" stroke-width="8"/>
+  
+  <!-- Fila 2 -->
+  <rect x="96" y="256" width="72" height="56" fill="#0a9295" stroke="#1a1a1a" stroke-width="8"/>
+  <rect x="184" y="256" width="72" height="56" fill="#bb3f03" stroke="#1a1a1a" stroke-width="8"/>
+  <rect x="272" y="256" width="72" height="56" fill="#015f72" stroke="#1a1a1a" stroke-width="8"/>
+  <rect x="360" y="256" width="72" height="56" fill="#93cfbb" stroke="#1a1a1a" stroke-width="8"/>
+  
+  <!-- Fila 3 -->
+  <rect x="96" y="336" width="72" height="56" fill="#ed9c05" stroke="#1a1a1a" stroke-width="8"/>
+  <rect x="184" y="336" width="72" height="56" fill="#93cfbb" stroke="#1a1a1a" stroke-width="8"/>
+  <rect x="272" y="336" width="72" height="56" fill="#ca6703" stroke="#1a1a1a" stroke-width="8"/>
+  <rect x="360" y="336" width="72" height="56" fill="#0a9295" stroke="#1a1a1a" stroke-width="8"/>
+  
+  <!-- Herramienta/Llave estilizada superpuesta -->
+  <g transform="translate(320, 380) rotate(-30)">
+    <rect x="0" y="0" width="120" height="40" rx="0" fill="#9d2227" stroke="#1a1a1a" stroke-width="8"/>
+    <circle cx="140" cy="20" r="40" fill="none" stroke="#9d2227" stroke-width="16"/>
+    <circle cx="140" cy="20" r="40" fill="none" stroke="#1a1a1a" stroke-width="8"/>
+    <rect x="40" y="40" width="16" height="24" fill="#9d2227" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="72" y="40" width="16" height="16" fill="#9d2227" stroke="#1a1a1a" stroke-width="4"/>
+  </g>
+  
+  <!-- Sombra neobrutal -->
+  <rect x="72" y="136" width="384" height="320" fill="none" stroke="#1a1a1a" stroke-width="4" transform="translate(8, 8)" opacity="0.3"/>
+</svg>

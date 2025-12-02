@@ -1,0 +1,40 @@
+// ============================================
+// COMPONENTE - CARD NEOBRUTALISTA
+// ============================================
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.card {
+  @include neo-card;
+  color: var(--color-text);
+  padding: $spacing-lg;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  
+  @include neo-hover;
+  
+  // Botón dentro de la card
+  .btn {
+    margin-top: $spacing-md;
+  }
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: $font-weight-bold;
+  color: var(--color-text);
+  margin-bottom: $spacing-sm;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.card-content {
+  font-size: $font-size-base;
+  color: var(--color-text-light);
+  line-height: 1.6;
+  
+  p {
+    margin: 0;
+  }
+}
+

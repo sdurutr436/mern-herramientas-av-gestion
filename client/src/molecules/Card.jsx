@@ -1,5 +1,4 @@
 import React from 'react';
-import '../css/Card.css';
 
 const Card = ({ children, title, style }) => (
   <div className="card" style={style}>

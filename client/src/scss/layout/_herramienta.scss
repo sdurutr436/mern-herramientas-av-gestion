@@ -1,0 +1,202 @@
+// ============================================
+// LAYOUT - HERRAMIENTA TEMPLATE NEOBRUTALISTA
+// ============================================
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// ============================================
+// ESTRUCTURA PRINCIPAL (BEM: herramienta__)
+// ============================================
+
+.herramienta {
+  max-width: 100%;
+}
+
+.herramienta__header {
+  margin-bottom: $spacing-lg;
+  text-align: center;
+}
+
+.herramienta__titulo {
+  color: var(--color-text);
+  font-size: 1.5rem;
+  font-weight: $font-weight-bold;
+  margin: 0 0 $spacing-sm 0;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  
+  @include respond-to('tablet') {
+    font-size: 1.25rem;
+  }
+}
+
+.herramienta__descripcion {
+  color: var(--color-text-light);
+  margin: 0;
+  font-size: $font-size-base;
+  line-height: 1.6;
+}
+
+.herramienta__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-xl;
+  align-items: start;
+  
+  @include respond-to('tablet') {
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+  }
+}
+
+.herramienta__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.herramienta__main {
+  min-height: 300px;
+  
+  &--full {
+    grid-column: 1 / -1;
+  }
+}
+
+// ============================================
+// PLACEHOLDER (cuando no hay resultados)
+// ============================================
+
+.herramienta__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: $spacing-xl;
+  background: var(--color-bg-secondary);
+  border: $neo-border-width dashed var(--color-border);
+  text-align: center;
+  
+  p {
+    margin: 0;
+    color: var(--color-text-light);
+    font-size: $font-size-base;
+    max-width: 300px;
+  }
+}
+
+.herramienta__placeholder-icon {
+  width: 80px;
+  height: 80px;
+  color: var(--color-border);
+  margin-bottom: $spacing-md;
+  flex-shrink: 0;
+}
+
+// ============================================
+// RESULTADOS NEOBRUTALISTAS
+// ============================================
+
+.results {
+  background: var(--color-bg-secondary);
+  border: $neo-border-width solid var(--color-text);
+  padding: $spacing-lg;
+  box-shadow: var(--shadow-md);
+}
+
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+  padding-bottom: $spacing-md;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.results-title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+
+.results-count {
+  background: var(--color-secondary);
+  color: var(--color-text);
+  padding: $spacing-xs $spacing-sm;
+  border: 2px solid var(--color-text);
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+}
+
+.results-content {
+  overflow-x: auto;
+}
+
+.results-empty {
+  text-align: center;
+  padding: $spacing-2xl;
+  color: var(--color-text-light);
+  
+  .results-empty-icon {
+    font-size: 3rem;
+    margin-bottom: $spacing-md;
+    opacity: 0.5;
+  }
+  
+  .results-empty-text {
+    font-size: $font-size-lg;
+  }
+}
+
+// ============================================
+// TABLA DE RESULTADOS
+// ============================================
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  
+  th,
+  td {
+    padding: $spacing-sm $spacing-md;
+    text-align: left;
+    border-bottom: 2px solid var(--color-border);
+  }
+  
+  th {
+    background: var(--color-bg);
+    font-weight: $font-weight-bold;
+    color: var(--color-text);
+    font-size: $font-size-sm;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  
+  td {
+    color: var(--color-text-light);
+    font-size: $font-size-sm;
+  }
+  
+  tbody tr {
+    transition: $transition-fast;
+    
+    &:hover {
+      background: var(--color-highlight);
+    }
+  }
+}
+
+// ============================================
+// ACCIONES
+// ============================================
+
+.results-actions {
+  display: flex;
+  gap: $spacing-sm;
+  margin-top: $spacing-lg;
+  padding-top: $spacing-lg;
+  border-top: 2px solid var(--color-border);
+}

@@ -1,0 +1,114 @@
+// ============================================
+// LAYOUT - MAIN LAYOUT NEOBRUTALISTA
+// ============================================
+
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.main-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  transition: var(--transition-theme);
+}
+
+// ============================================
+// HEADER - 2 BARRAS NEOBRUTALISTAS
+// ============================================
+
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+}
+
+// Barra superior - Título centrado
+.header-top {
+  background: linear-gradient(135deg, var(--header-bg-start) 0%, var(--header-bg-end) 100%);
+  padding: $spacing-md $spacing-xl;
+  text-align: center;
+  border-bottom: $neo-border-width solid var(--color-text);
+}
+
+.main-logo {
+  text-decoration: none;
+  color: var(--header-text);
+  
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.main-logo-text {
+  margin: 0;
+  font-weight: $font-weight-bold;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  color: var(--header-text);
+  text-transform: uppercase;
+  
+  @include respond-to('tablet') {
+    font-size: 1.25rem;
+  }
+}
+
+// ============================================
+// NAVIGATION - Barra inferior
+// ============================================
+
+.header-nav {
+  background: var(--color-bg-secondary);
+  border-bottom: $neo-border-width solid var(--color-text);
+  padding: $spacing-sm $spacing-xl;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  @include respond-to('tablet') {
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+  }
+}
+
+.nav-links {
+  display: flex;
+  gap: $spacing-sm;
+  
+  @include respond-to('tablet') {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+// ============================================
+// BODY
+// ============================================
+
+.main-body {
+  flex: 1;
+  padding: $spacing-2xl $spacing-md;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  
+  @include respond-to('tablet') {
+    padding: $spacing-lg $spacing-sm;
+  }
+}
+
+// ============================================
+// FOOTER NEOBRUTALISTA
+// ============================================
+
+.main-footer {
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  border-top: $neo-border-width solid var(--color-text);
+  margin-top: auto;
+  padding: $spacing-md;
+  text-align: center;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-sm;
+}
