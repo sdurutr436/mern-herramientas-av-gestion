@@ -82,23 +82,23 @@ function getGradientLevel(count) {
 
 exports.obtenerMapaCalor = async (req, res) => {
   try {
-    // Recibe los archivos subidos desde el frontend
-    const reservasPath = req.files['reservas'][0].path;
-    
-    // Procesa el archivo de reservas
-    const reservasArr = await parseXLSXHuesped(reservasPath);
-    
-    // Borra archivo temporal
-    fs.unlinkSync(reservasPath);
-    
-    // Si hay archivo de apartamentos, también lo procesa (opcional)
-    let apartamentosPath = null;
-    if (req.files['apartamentos'] && req.files['apartamentos'][0]) {
-      apartamentosPath = req.files['apartamentos'][0].path;
-      fs.unlinkSync(apartamentosPath);
+    // Recibe los archivos subidos desde el frontend: checkins y checkouts
+    if (!req.files['checkins'] || !req.files['checkouts']) {
+      return res.status(400).json({ message: 'Se requieren ambos archivos: check-ins y check-outs' });
     }
+    
+    const checkinsPath = req.files['checkins'][0].path;
+    const checkoutsPath = req.files['checkouts'][0].path;
+    
+    // Procesa ambos archivos
+    const checkinsArr = await parseXLSXHuesped(checkinsPath);
+    const checkoutsArr = await parseXLSXHuesped(checkoutsPath);
+    
+    // Borra archivos temporales
+    fs.unlinkSync(checkinsPath);
+    fs.unlinkSync(checkoutsPath);
 
-    // Encontrar el rango de fechas de los check-ins
+    // Encontrar el rango de fechas SOLO de los check-ins
     let minDate = null;
     let maxDate = null;
     
@@ -106,37 +106,36 @@ exports.obtenerMapaCalor = async (req, res) => {
     const checkinsPerDay = {};
     const checkoutsPerDay = {};
     
-    reservasArr.forEach(r => {
-      // Obtener fechas de check-in y check-out
-      const checkinRaw = r.checkin || r['Check in'] || r['Check-in'] || r['Checkin'] || r['CHECKIN'];
-      const checkoutRaw = r.checkout || r['Check out'] || r['Check-out'] || r['Checkout'] || r['CHECKOUT'];
+    // Procesar archivo de check-ins (determina el rango de fechas)
+    checkinsArr.forEach(r => {
+      // Buscar columna de fecha (puede ser "Fecha", "Check in", "Checkin", etc.)
+      const fechaRaw = r.fecha || r.Fecha || r['Check in'] || r['Check-in'] || r['Checkin'] || r['CHECKIN'] || r['FECHA'];
+      const checkinDate = parseExcelDate(fechaRaw);
       
-      const checkinDate = parseExcelDate(checkinRaw);
-      const checkoutDate = parseExcelDate(checkoutRaw);
-      
-      // Procesar check-in
       if (checkinDate && !isNaN(checkinDate.getTime())) {
         const dateKey = checkinDate.toISOString().split('T')[0];
         checkinsPerDay[dateKey] = (checkinsPerDay[dateKey] || 0) + 1;
         
-        // Actualizar rango de fechas
+        // Actualizar rango de fechas (solo con check-ins)
         if (!minDate || checkinDate < minDate) minDate = new Date(checkinDate);
         if (!maxDate || checkinDate > maxDate) maxDate = new Date(checkinDate);
       }
+    });
+    
+    // Procesar archivo de check-outs (NO modifica el rango)
+    checkoutsArr.forEach(r => {
+      // Buscar columna de fecha
+      const fechaRaw = r.fecha || r.Fecha || r['Check out'] || r['Check-out'] || r['Checkout'] || r['CHECKOUT'] || r['FECHA'];
+      const checkoutDate = parseExcelDate(fechaRaw);
       
-      // Procesar check-out
       if (checkoutDate && !isNaN(checkoutDate.getTime())) {
         const dateKey = checkoutDate.toISOString().split('T')[0];
         checkoutsPerDay[dateKey] = (checkoutsPerDay[dateKey] || 0) + 1;
-        
-        // Extender rango si el checkout está fuera
-        if (!minDate || checkoutDate < minDate) minDate = new Date(checkoutDate);
-        if (!maxDate || checkoutDate > maxDate) maxDate = new Date(checkoutDate);
       }
     });
 
     if (!minDate || !maxDate) {
-      return res.status(400).json({ message: 'No se encontraron fechas válidas en el archivo' });
+      return res.status(400).json({ message: 'No se encontraron fechas válidas en el archivo de check-ins' });
     }
 
     // Generar todas las fechas del rango

@@ -24,8 +24,8 @@ const upload = multer({
 router.post(
   '/obtener',
   upload.fields([
-    { name: 'apartamentos', maxCount: 1 },
-    { name: 'reservas', maxCount: 1 }
+    { name: 'checkins', maxCount: 1 },
+    { name: 'checkouts', maxCount: 1 }
   ]),
   (req, res, next) => {
     // Validar que al menos el archivo de reservas esté presente

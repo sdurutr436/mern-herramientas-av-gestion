@@ -11,15 +11,16 @@ import { useToast } from '../context/ToastContext';
 import API_URL from '../config';
 
 const instruccionesMapa = [
-  'Carga el archivo XLSX de reservas descargado de tu sistema de gestión',
-  'El sistema detectará automáticamente el rango de fechas del archivo',
-  'Haz clic en "Generar Mapa de Calor" para visualizar la ocupación',
+  'Carga el archivo XLSX de Check-ins (entradas) descargado de tu sistema de gestión',
+  'Carga el archivo XLSX de Check-outs (salidas) descargado de tu sistema de gestión',
+  'El rango de fechas se determina por las fechas de check-in',
   'Los colores verdes indican entradas (check-ins) y los rojos salidas (check-outs)',
   'Pasa el cursor sobre cada celda para ver el detalle de reservas'
 ];
 
 const MapaCalorPage = () => {
-  const [reservas, setReservas] = useState(null);
+  const [checkins, setCheckins] = useState(null);
+  const [checkouts, setCheckouts] = useState(null);
   const [loading, setLoading] = useState(false);
   const [alerta, setAlerta] = useState(null);
   const [mapaData, setMapaData] = useState(null);
@@ -27,15 +28,16 @@ const MapaCalorPage = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    if (!reservas) {
-      setAlerta({ message: 'Debes subir el archivo de reservas.', type: 'error' });
+    if (!checkins || !checkouts) {
+      setAlerta({ message: 'Debes subir ambos archivos: check-ins y check-outs.', type: 'error' });
       return;
     }
     setAlerta(null);
     setLoading(true);
 
     const formData = new FormData();
-    formData.append('reservas', reservas);
+    formData.append('checkins', checkins);
+    formData.append('checkouts', checkouts);
 
     try {
       const res = await fetch(`${API_URL}/api/mapa/obtener`, {
@@ -58,7 +60,8 @@ const MapaCalorPage = () => {
   };
 
   const handleClear = () => {
-    setReservas(null);
+    setCheckins(null);
+    setCheckouts(null);
     setMapaData(null);
     setAlerta(null);
   };
@@ -66,21 +69,28 @@ const MapaCalorPage = () => {
   const sidebarContent = (
     <>
       <InstructionsList steps={instruccionesMapa} type="info" />
-      <Card>
+      <Card title="Generar Mapa de Calor">
         <form onSubmit={handleSubmit}>
           <FileUpload
-            label="Reservas (.xlsx)"
+            label="Check-ins (.xlsx)"
             accept=".xlsx"
-            onFileChange={e => setReservas(e.target.files[0])}
-            file={reservas}
-            onRemove={() => setReservas(null)}
+            onFileChange={e => setCheckins(e.target.files[0])}
+            file={checkins}
+            onRemove={() => setCheckins(null)}
+          />
+          <FileUpload
+            label="Check-outs (.xlsx)"
+            accept=".xlsx"
+            onFileChange={e => setCheckouts(e.target.files[0])}
+            file={checkouts}
+            onRemove={() => setCheckouts(null)}
           />
           {alerta && <Alert message={alerta.message} type={alerta.type} onClose={() => setAlerta(null)}/>}
           <div className="btn-group">
             <Button variant="primary" type="submit" disabled={loading}>
               {loading ? <Loader size={18}/> : 'Generar Mapa de Calor'}
             </Button>
-            {mapaData && (
+            {(checkins || checkouts || mapaData) && (
               <Button variant="secondary" type="button" onClick={handleClear}>
                 Limpiar
               </Button>
