@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../css/MainLayout.css';
 import Button from '../atoms/Button';
 import ThemeToggle from '../atoms/ThemeToggle';
+import ShutdownBanner from '../molecules/ShutdownBanner';
 
 const navItems = [
   { label: 'Correo', path: '/correo' },
@@ -16,6 +17,7 @@ const MainLayout = ({ children }) => {
 
   return (
     <div className="main-layout">
+      <ShutdownBanner />
       <header className="main-header">
         <Link to="/" className="main-logo">
           <h1 className="main-logo-text">Herramientas AV Gestión</h1>
