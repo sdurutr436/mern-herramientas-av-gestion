@@ -2,8 +2,11 @@
 
 Sistema de gestión integral para apartamentos turísticos desarrollado con el stack MERN (MongoDB, Express, React, Node.js). Proporciona herramientas automatizadas para gestionar reservas, contactos y visualización de ocupación.
 
+> ⚠️ **Proyecto legacy.** El servicio se cerrará el **1 de agosto** y quedará sin uso. Para continuar, únete a [Stay-Sidekick.com](https://Stay-Sidekick.com). Las siguientes capturas dejan constancia de cómo se veía la aplicación.
+
 ## 📋 Tabla de Contenidos
 
+- [Capturas de pantalla](#-capturas-de-pantalla)
 - [Características](#-características)
 - [Arquitectura del Proyecto](#-arquitectura-del-proyecto)
 - [Requisitos Previos](#-requisitos-previos)
@@ -14,6 +17,17 @@ Sistema de gestión integral para apartamentos turísticos desarrollado con el s
 - [Estructura del Proyecto](#-estructura-del-proyecto)
 - [API Endpoints](#-api-endpoints)
 - [Tecnologías](#-tecnologías)
+
+## 📸 Capturas de pantalla
+
+### Página principal — modo claro
+![Página principal en modo claro](docs/assets/pagina-principal-lightmode.png)
+
+### Página principal — modo oscuro
+![Página principal en modo oscuro](docs/assets/pagina-principal-darkmode.png)
+
+### Ejemplo de herramienta
+![Ejemplo de una herramienta](docs/assets/ejemplo-herramienta1.png)
 
 ## ✨ Características
 
