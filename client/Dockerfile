@@ -25,12 +25,13 @@ FROM nginx:alpine
 # Copiar build de React a nginx
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Copiar configuración de nginx como plantilla (se rellena $PORT al arrancar)
+# Plantilla de nginx + script de arranque (rellenan $PORT y el resolver DNS)
 COPY nginx.conf /etc/nginx/nginx.conf.template
+COPY start.sh /start.sh
+RUN sed -i 's/\r$//' /start.sh && chmod +x /start.sh
 
 # Railway inyecta $PORT; fallback 80 para ejecución local
 ENV PORT=80
 EXPOSE 80
 
-# Sustituir solo $PORT y arrancar nginx
-CMD ["/bin/sh", "-c", "envsubst '${PORT}' < /etc/nginx/nginx.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+CMD ["/start.sh"]
