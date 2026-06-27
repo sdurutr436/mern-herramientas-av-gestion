@@ -102,7 +102,8 @@ app.get('/api/health', (req, res) => {
 });
 
 // Arrancar servidor
-app.listen(PORT, () => {
+// '::' = IPv6 (dual-stack en Linux); requerido por la red privada IPv6 de Railway
+app.listen(PORT, '::', () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
 
