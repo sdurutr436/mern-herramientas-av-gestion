@@ -7,15 +7,15 @@ import Button from '../atoms/Button';
 const motivos = [
   {
     titulo: 'Incumplimiento de normativa RGPD',
-    detalle: 'El tratamiento de datos personales de huéspedes no cumple con las garantías exigidas por el Reglamento General de Protección de Datos.'
+    detalle: 'La aplicación procesa datos personales de huéspedes (nombres, teléfonos y fechas de estancia) sin base legal, consentimiento ni política de retención documentados, como exige el Reglamento General de Protección de Datos.'
   },
   {
     titulo: 'Datos hardcodeados',
-    detalle: 'Configuración, credenciales y lógica de negocio están escritas directamente en el código, lo que impide un mantenimiento y despliegue seguros.'
+    detalle: 'Hay valores de infraestructura embebidos como fallback en el código —cadena de conexión a MongoDB y orígenes CORS apuntando a localhost— en lugar de depender solo de variables de entorno, lo que dificulta un despliegue seguro y reproducible.'
   },
   {
     titulo: 'Falta de seguridad en formularios y subida de archivos',
-    detalle: 'Los formularios y la carga de ficheros no aplican validación ni saneamiento suficientes, exponiendo la aplicación a entradas maliciosas.'
+    detalle: 'El procesado de ficheros depende de xlsx@0.18.5, con vulnerabilidades de alta severidad sin parche (Prototype Pollution y ReDoS); la migración pendiente a ExcelJS nunca se completó.'
   },
   {
     titulo: 'Subida de costes en el mantenimiento',
