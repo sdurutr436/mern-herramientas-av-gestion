@@ -40,9 +40,6 @@ const MainLayout = ({ children }) => {
       </main>
       <footer className="main-footer">
         <span>© {new Date().getFullYear()} Herramientas AV - Gestión</span>
-        <Button variant="secondary" onClick={() => navigate('/por-que-cierra')}>
-          ¿Por qué cierra el proyecto?
-        </Button>
       </footer>
     </div>
   );

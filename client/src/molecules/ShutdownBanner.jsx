@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../css/ShutdownBanner.css';
 
 const COOKIE = 'av_shutdown_dismissed';
@@ -23,7 +24,8 @@ const ShutdownBanner = () => {
         <a href="https://Stay-Sidekick.com" target="_blank" rel="noopener noreferrer">
           Stay-Sidekick.com
         </a>{' '}
-        para continuar.
+        para continuar.{' '}
+        <Link to="/por-que-cierra">¿Por qué cierra?</Link>
       </span>
       <button className="shutdown-banner-close" onClick={dismiss} aria-label="Cerrar">
         &times;

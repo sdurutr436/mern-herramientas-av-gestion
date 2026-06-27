@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import MainLayout from '../templates/MainLayout';
 import Card from '../molecules/Card';
 import Button from '../atoms/Button';
+import '../css/HomePage.css';
 
 const motivos = [
   {
