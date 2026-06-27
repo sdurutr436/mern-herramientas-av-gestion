@@ -15,13 +15,3 @@
   text-decoration: underline;
   font-weight: var(--font-weight-bold);
 }
-
-.shutdown-banner-close {
-  background: none;
-  border: none;
-  color: var(--color-text-on-dark);
-  font-size: 1.4rem;
-  line-height: 1;
-  cursor: pointer;
-  padding: 0 var(--spacing-xs);
-}

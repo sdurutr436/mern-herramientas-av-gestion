@@ -17,24 +17,26 @@ const MainLayout = ({ children }) => {
 
   return (
     <div className="main-layout">
-      <ShutdownBanner />
-      <header className="main-header">
-        <Link to="/" className="main-logo">
-          <h1 className="main-logo-text">Herramientas AV Gestión</h1>
-        </Link>
-        <nav className="main-nav">
-          {navItems.map(item => (
-            <Button
-              key={item.path}
-              variant="secondary"
-              onClick={() => navigate(item.path)}
-            >
-              {item.label}
-            </Button>
-          ))}
-          <ThemeToggle />
-        </nav>
-      </header>
+      <div className="app-sticky-top">
+        <header className="main-header">
+          <Link to="/" className="main-logo">
+            <h1 className="main-logo-text">Herramientas AV Gestión</h1>
+          </Link>
+          <nav className="main-nav">
+            {navItems.map(item => (
+              <Button
+                key={item.path}
+                variant="secondary"
+                onClick={() => navigate(item.path)}
+              >
+                {item.label}
+              </Button>
+            ))}
+            <ThemeToggle />
+          </nav>
+        </header>
+        <ShutdownBanner />
+      </div>
       <main className="main-body">
         {children}
       </main>
